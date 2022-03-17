@@ -7,7 +7,7 @@ metadata:
   labels:
     nirmata.io/component: "nginx-deployment"
 spec:
-  replicas: 3
+  replicas: 1
   revisionHitoryLimit: 5
   selector:
     matchLabels:
