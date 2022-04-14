@@ -7,7 +7,7 @@ metadata:
   labels:
     nirmata.io/component: "nginx-deployment"
 spec:
-  replicas: 2
+  replicas: 3
   revisionHitoryLimit: 5
   selector:
     matchLabels:
@@ -30,7 +30,7 @@ spec:
       nodeSelector: {}
       containers:
       - name: "nginx"
-        image: "ghcr.io/nirmata/nginx:latest"
+        image: "ghcr.io/nirmata/nginx:latest1"
         command: []
         args: []
         ports:
