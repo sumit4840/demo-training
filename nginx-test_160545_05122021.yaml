@@ -57,6 +57,23 @@ spec:
         args: []
 ---
 apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dolis-in
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+spec:
+  rules:
+  - host: apparels.ecom-store.com
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: dolis
+            port:
+              number: 8080
 metadata:
   name: dolis-in
   annotations:
