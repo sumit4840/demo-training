@@ -1,18 +1,41 @@
 ---
+apiVersion: "v1"
+kind: "Service"
+metadata:
+  annotations: {}
+  name: "dolis"
+  labels:
+    app.kubernetes.io/name: "nginx-catalog"
+    app.kubernetes.io/component: "deployment.dolis"
+spec:
+  externalIPs: []
+  healthCheckNodePort: 0
+  loadBalancerSourceRanges: []
+  type: "NodePort"
+  selector:
+    app.kubernetes.io/component: "deployment.dolis"
+  ports:
+  - name: "tcp"
+    nodePort: 32767
+    port: 8080
+    protocol: "TCP"
+    targetPort: 8080
+
+---
 kind: "Deployment"
 apiVersion: "apps/v1"
 metadata:
   annotations: {}
-  name: "nginx-deployment"
+  name: "dolis"
   labels:
-    nirmata.io/component: "nginx-deployment"
+    app.kubernetes.io/name: "nginx-catalog"
+    app.kubernetes.io/component: "deployment.dolis"
 spec:
-  replicas: 3
-  revisionHitoryLimit: 5
+  replicas: 1
+  revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: "nginx"
-      nirmata.io/component: "nginx-deployment"
+      app.kubernetes.io/component: "deployment.dolis"
     matchExpressions: []
   strategy:
     type: "RollingUpdate"
@@ -23,16 +46,13 @@ spec:
     metadata:
       annotations: {}
       labels:
-        app: "nginx"
-        nirmata.io/component: "nginx-deployment"
+        app.kubernetes.io/name: "nginx-catalog"
+        app.kubernetes.io/component: "deployment.dolis"
     spec:
       terminationGracePeriodSeconds: 30
       nodeSelector: {}
       containers:
-      - name: "nginx"
-        image: "ghcr.io/nirmata/nginx:latest1"
+      - name: "dolis"
+        image: "nginx:latest"
         command: []
         args: []
-        ports:
-        - containerPort: 80
-          protocol: "TCP"
