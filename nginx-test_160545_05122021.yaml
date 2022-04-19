@@ -16,7 +16,6 @@ spec:
     app.kubernetes.io/component: "deployment.dolis"
   ports:
   - name: "tcp"
-    nodePort: 32764
     port: 8080
     protocol: "TCP"
     targetPort: 8080
@@ -56,3 +55,25 @@ spec:
         image: "nginx:latest"
         command: []
         args: []
+---
+apiVersion: "networking.k8s.io/v1"
+kind: "Ingress"
+metadata:
+  annotations: {}
+  name: "dolis-svc"
+  labels:
+    app.kubernetes.io/name: "git-demo"
+    app.kubernetes.io/instance: "git-demo"
+spec:
+  ingressClassName: ""
+  backend:
+    serviceName: "dolis"
+    servicePort: 8080
+  rules:
+  - host: "xyz.com"
+    http:
+      paths:
+      - path: "         /"
+        backend:
+          serviceName: "dolis"
+          servicePort: 8080
