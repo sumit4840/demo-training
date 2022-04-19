@@ -16,7 +16,7 @@ spec:
     app.kubernetes.io/component: "deployment.dolis"
   ports:
   - name: "tcp"
-    nodePort: 32769
+    nodePort: 32764
     port: 8080
     protocol: "TCP"
     targetPort: 8080
