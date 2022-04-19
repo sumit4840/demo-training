@@ -56,24 +56,20 @@ spec:
         command: []
         args: []
 ---
-apiVersion: "networking.k8s.io/v1"
-kind: "Ingress"
+apiVersion: networking.k8s.io/v1
 metadata:
-  annotations: {}
-  name: "dolis-svc"
-  labels:
-    app.kubernetes.io/name: "git-demo"
-    app.kubernetes.io/instance: "git-demo"
+  name: dolis-in
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
-  ingressClassName: ""
-  backend:
-    serviceName: "dolis"
-    servicePort: 8080
   rules:
-  - host: "xyz.com"
+  - host: apparels.ecom-store.com
     http:
       paths:
-      - path: "         /"
+      - pathType: Prefix
+        path: "/"
         backend:
-          serviceName: "dolis"
-          servicePort: 8080
+          service:
+            name: dolis
+            port:
+              number: 8080
