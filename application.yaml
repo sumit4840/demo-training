@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha
+kind: Application
+metadata:
+ name: myapp-agro-application
+ namespace: argocd
+spec:
+ project: default
+ source:
+  repoURL: https://github.com/sumit4840/demo-training.git
+  targetRevision: HEAD
+  path: application
+ destination:
+  server: https:kubrnetes.default.svc
+  namespace: my-app
+ syncPolicy:
+  syncOptions:
+    - CreateNamespace=true
+  automated:
+   selfHeal: true
+   prune: true
+
