@@ -10,7 +10,7 @@ spec:
   targetRevision: HEAD
   path: application
  destination:
-  server: https:kubrnetes.default.svc
+  server: https://kubrnetes.default.svc
   namespace: my-app
  syncPolicy:
   syncOptions:
