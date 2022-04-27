@@ -30,7 +30,7 @@ metadata:
     app.kubernetes.io/name: "nginx-catalog"
     app.kubernetes.io/component: "deployment.dolis"
 spec:
-  replicas: 1
+  replicas: 4
   revisionHistoryLimit: 5
   selector:
     matchLabels:
